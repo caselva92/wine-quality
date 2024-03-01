@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wine Quality Predictor</title>
+    <style>
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .slider {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Wine Quality Predictor</h2>
+        <div>
+            <label for="fixed_acidity">Fixed Acidity:</label>
+            <input type="range" min="4" max="16" value="10" class="slider" id="fixed_acidity">
+            <span id="fixed_acidity_value">10</span>
+        </div>
+        <div>
+            <label for="volatile_acidity">Volatile Acidity:</label>
+            <input type="range" min="0" max="2" step="0.01" value="0.5" class="slider" id="volatile_acidity">
+            <span id="volatile_acidity_value">0.5</span>
+        </div>
+        <div>
+            <label for="citric_acid">Citric Acid:</label>
+            <input type="range" min="0" max="1" step="0.01" value="0.5" class="slider" id="citric_acid">
+            <span id="citric_acid_value">0.5</span>
+        </div>
+        <div>
+            <label for="residual_sugar">Residual Sugar (g/dm^3):</label>
+            <input type="range" min="0" max="20" step="0.1" value="5" class="slider" id="residual_sugar">
+            <span id="residual_sugar_value">5</span>
+        </div>
+        <div>
+            <label for="chlorides">Chlorides (g/dm^3):</label>
+            <input type="range" min="0" max="1" step="0.01" value="0.08" class="slider" id="chlorides">
+            <span id="chlorides_value">0.08</span>
+        </div>
+        <div>
+            <label for="free_sulfur_dioxide">Free Sulfur Dioxide (mg/dm^3):</label>
+            <input type="range" min="1" max="72" value="30" class="slider" id="free_sulfur_dioxide">
+            <span id="free_sulfur_dioxide-value">30</span>
+        </div>
+        <div>
+            <label for="total_sulfur_dioxide">Total Sulfur Dioxide (mg/dm^3):</label>
+            <input type="range" min="6" max="289" value="150" class="slider" id="total_sulfur_dioxide">
+            <span id="total_sulfur_dioxide-value">150</span>
+        </div>
+        <div>
+            <label for="density">Density (g/cm^3):</label>
+            <input type="range" min="0.990" max="1.010" step="0.001" value="0.996" class="slider" id="density">
+            <span id="density_value">0.996</span>
+        </div>
+        <div>
+            <label for="pH">pH:</label>
+            <input type="range" min="2.72" max="4.01" step="0.01" value="3.20" class="slider" id="pH">
+            <span id="pH_value">3.20</span>
+        </div>
+        <div>
+            <label for="sulphates">Sulphates (g/dm^3):</label>
+            <input type="range" min="0.33" max="2.00" step="0.01" value="0.65" class="slider" id="sulphates">
+            <span id="sulphates_value">0.65</span>
+        </div>
+        <div>
+            <label for="alcohol">Alcohol (% vol.):</label>
+            <input type="range" min="8" max="15" step="0.1" value="12" class="slider" id="alcohol">
+            <span id="alcohol_value">12</span>
+        </div>
+        <button onclick="predictWineQuality()">Predict</button>
+        <p id="prediction-result"></p>
+    </div>
+
+    <script>
+        function predictWineQuality() {
+           
+            var fixedAcidity = document.getElementById("fixed_acidity").value;
+            var volatileAcidity = document.getElementById("volatile_acidity").value;
+            var citricAcid = document.getElementById("citric_acid").value;
+            var residualSugar = document.getElementById("residual-sugar").value;
+            var chlorides = document.getElementById("chlorides").value;
+            var freeSulfurDioxide = document.getElementById("free_sulfur_dioxide").value;
+            var totalSulfurDioxide = document.getElementById("total_sulfur_dioxide").value;
+            var density = document.getElementById("density").value;
+            var pH = document.getElementById("pH").value;
+            var sulphates = document.getElementById("sulphates").value;
+            var alcohol = document.getElementById("alcohol").value;
+
+            
+            var predictedQuality = parseFloat(fixedAcidity) + parseFloat(volatileAcidity) + parseFloat(citricAcid) + parseFloat(residualSugar) + parseFloat(chlorides) + parseFloat(freeSulfurDioxide) + parseFloat(totalSulfurDioxide) + parseFloat(density) + parseFloat(pH) + parseFloat(sulphates) + parseFloat(alcohol);
+            document.getElementById("prediction-result").innerHTML = "Predicted Quality: " + predictedQuality.toFixed(2);
+        }
+
+        
+        var sliders = document.getElementsByClassName("slider");
+        for (var i = 0; i < sliders.length; i++) {
+            var slider = sliders[i];
+            var sliderValueDisplay = document.getElementById(slider.id + "-value");
+            sliderValueDisplay.innerHTML = slider.value;
+
+            slider.oninput = function() {
+                sliderValueDisplay.innerHTML = this.value;
+            };
+        }
+    </script>
+</body>
+</html>
